@@ -7,7 +7,7 @@ The Agent Control Room is a sidecar repo/folder that documents and governs your 
 ## Positioning
 
 ```text
-Create or choose a VPS.
+Create a VPS or choose an existing one.
 Bootstrap the Agent Control Room.
 Register one Hermes agent.
 Add direct specialists when roles become clear.
@@ -117,6 +117,7 @@ agent-control-room/
       task-template.md
       result-template.md
   skills/
+    create-vps/
     setup-control-room/
     agent-control-room/
     agent-task-router/
@@ -134,7 +135,7 @@ agent-control-room/
 ## Quick Start
 
 1. Create or choose an Ubuntu/Debian VPS.
-2. Clone this repo onto the VPS, usually at `/root/agent-control-room`.
+2. Bootstrap the Agent Control Room onto that VPS.
 3. Link or install the bundled skills into your agent tool.
 4. Copy `templates/agent/` into `agents/<your-agent-name>/`.
 5. Fill in `inventory.md`, `docker.md`, `env-map.md`, `runbook.md`, and `backup.md`.

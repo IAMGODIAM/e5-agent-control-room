@@ -5,7 +5,7 @@ This template is Control Room first.
 Recommended order:
 
 ```text
-1. Create or choose a VPS.
+1. Create a VPS or choose an existing one.
 2. Bootstrap the Agent Control Room.
 3. Register one Hermes agent.
 4. Add direct specialist agents when roles become clear.
@@ -24,7 +24,7 @@ Recommended starting point:
 - 4 vCPU / 8GB RAM if running several agents, browser automation, or heavier crons
 - SSH key access
 
-If you are provisioning on Hetzner, a separate provisioning skill can create the VPS, SSH key, and local SSH alias before this template is installed.
+If you are provisioning on Hetzner, use the bundled `create-vps` skill to create the VPS, SSH key, and local SSH alias before this template is installed.
 
 ## Step 2: Bootstrap The Control Room
 
@@ -43,6 +43,16 @@ Then install the tools you want on the VPS:
 - Hermes Agent
 
 The bundled `setup-control-room` skill describes an automated bootstrap flow for this.
+
+If you are starting from nothing, the paired flow is:
+
+```text
+create-vps
+  -> creates the server and SSH alias
+
+setup-control-room
+  -> installs tooling and clones this template
+```
 
 ## Step 3: Register One Agent
 
