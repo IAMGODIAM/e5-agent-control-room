@@ -1,5 +1,7 @@
 # Hermes Agent Control Room
 
+![Hermes Agent Control Room](assets/hermes-agent-control-room.png)
+
 A public template for setting up an **Agent Control Room** first, then scaling from one Hermes agent to direct specialists, orchestrated teams, and automated workflows.
 
 The Agent Control Room is a sidecar repo/folder that documents and governs your Hermes agents. It is **not** an agent itself. It is the system map, operating manual, registry, runbook library, and recovery notebook for the agents you run.
