@@ -10,6 +10,20 @@ It gives you a clean path from:
 one agent -> direct specialists -> orchestrator -> automated agent team
 ```
 
+## About
+
+Hermes Agent Control Room is a starter kit for people who want to run Hermes agents like an operating system instead of a pile of disconnected bots.
+
+The repo gives you:
+
+- A control-plane folder structure for documenting agents.
+- Templates for agent runbooks, Docker notes, secret maps, and backups.
+- A level-based architecture for growing from one agent to a specialist team.
+- A task bus pattern for orchestrator-to-specialist delegation.
+- Bundled setup and operations skills an agent can use to build or manage the system.
+
+The key idea is simple: **set up the Control Room first, then plug agents into it.**
+
 ## Core Idea
 
 ```text
@@ -208,19 +222,138 @@ agent-control-room/
     level-4-automated-team/
 ```
 
-## Quick Start
+## Setup
 
-1. Create or choose an Ubuntu/Debian VPS.
-2. Bootstrap the Agent Control Room onto that VPS.
-3. Link or install the bundled skills into your agent tool.
-4. Copy `templates/agent/` into `agents/<your-agent-name>/`.
-5. Fill in `inventory.md`, `docker.md`, `env-map.md`, `runbook.md`, and `backup.md`.
-6. Keep raw secrets out of the control room.
-7. Store live Hermes data in `/srv/<agent-name>/data` or your preferred runtime path.
-8. Add specialist agents only when roles become clear.
-9. Add an orchestrator only when direct specialist usage becomes annoying.
+There are three ways to use this repo.
 
-See `docs/starter-guide.md` for the recommended VPS bootstrap flow.
+### Option A: Point An Agent At This Repo
+
+This repo is designed to be agent-readable.
+
+If your agent can read a GitHub repo or a local clone, point it here and ask:
+
+```text
+Read this repo and help me set up an Agent Control Room.
+Start with docs/starter-guide.md and the setup-control-room skill.
+```
+
+If the bundled skills are available to the agent, you can be more direct:
+
+```text
+Use setup-control-room to bootstrap my VPS.
+```
+
+Or, if you need a new Hetzner server first:
+
+```text
+Use create-vps, then chain into setup-control-room.
+```
+
+The intended agent flow is:
+
+```text
+create-vps
+  -> creates a Hetzner VPS, SSH key, and SSH alias
+
+setup-control-room
+  -> installs tooling and clones this repo onto the VPS
+
+agent-control-room
+  -> helps register and manage agents inside the Control Room
+```
+
+Important: the repo does not magically run code when opened. It gives your agent the setup instructions, templates, and skills. You still ask the agent to run the setup flow.
+
+### Option B: Manual Setup On An Existing VPS
+
+Use this if you already have an Ubuntu/Debian VPS you can SSH into.
+
+SSH in:
+
+```bash
+ssh root@YOUR_SERVER
+```
+
+Clone the Control Room:
+
+```bash
+git clone https://github.com/shannhk/hermes-agent-control-room.git /root/agent-control-room
+cd /root/agent-control-room
+```
+
+Read the starter guide:
+
+```bash
+cat docs/starter-guide.md
+```
+
+Register your first agent:
+
+```bash
+mkdir -p agents/hermes-life
+cp templates/agent/*.md agents/hermes-life/
+```
+
+Then fill in:
+
+```text
+agents/hermes-life/inventory.md
+agents/hermes-life/docker.md
+agents/hermes-life/env-map.md
+agents/hermes-life/runbook.md
+agents/hermes-life/backup.md
+```
+
+Keep raw secrets out of those files.
+
+### Option C: Bootstrap With The Setup Skill
+
+Use this if you have an SSH alias already configured locally.
+
+The bundled `setup-control-room` skill is meant to:
+
+- connect to your VPS over SSH
+- install base packages
+- install Node.js
+- install Claude Code
+- install Codex CLI
+- install Docker
+- install Hermes Agent best-effort
+- clone this repo to `/root/agent-control-room`
+- link bundled skills into `~/.claude/skills`
+
+After it runs, SSH into the VPS and finish interactive auth:
+
+```bash
+ssh <alias>
+claude /login
+codex
+hermes
+```
+
+Then start using the Control Room:
+
+```bash
+cd /root/agent-control-room
+cat README.md
+ls templates/agent/
+ls skills/
+```
+
+### Recommended First Milestone
+
+Do not start by building a whole agent team.
+
+First milestone:
+
+```text
+1. Control Room exists on the VPS.
+2. One agent is documented in agents/<agent-name>/.
+3. No raw secrets are in the repo.
+4. You can restart/debug/recover that one agent using its runbook.
+```
+
+Then move to Level 2 and add direct specialists.
 
 ## Runtime Split
 
