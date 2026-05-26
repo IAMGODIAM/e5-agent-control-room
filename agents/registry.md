@@ -1,5 +1,10 @@
 # E5 Agent Registry
 
+> ⚠️ **SECURITY NOTE**: This registry contains metadata only. No raw credentials.
+> All secrets are stored in `~/.hermes/.env` on respective hosts. See `shared/api-keys-sop.md`.
+> **Last credential audit:** 2026-05-26 (P0 scrub — Sue/IAMGODIAM)
+
+
 > Control plane registry for the E5 Enclave agent mesh.
 > Last updated: 2026-05-17
 
@@ -41,5 +46,5 @@
 
 - No raw secrets in this repo
 - API keys stored in `~/.hermes/.env` on respective hosts
-- Splunk admin: `admin` / `E5enclave2026!`
-- Boardroom auth token: stored in systemd service file
+- Splunk admin: credentials stored in `~/.hermes/.env` on MC — key name: `SPLUNK_ADMIN_PASSWORD` (never commit value)
+- Boardroom auth token: stored in `~/.hermes/.env` on respective host — key name: `BOARDROOM_AUTH_TOKEN` (never commit value)
